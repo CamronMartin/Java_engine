@@ -1,0 +1,7 @@
+# Ignore compiled Java files
+*.class
+*.log
+
+# Ignore IntelliJ and VS Code config
+.idea/
+.vscode/
