@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL30.*;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import com.components.SpriteRenderer;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
@@ -59,6 +60,7 @@ public class LevelEditorScene extends Scene{
     private Texture testTexture;
 
     GameObject testOBJ;
+    private boolean firstTime = false;
 
 
     public LevelEditorScene() {
@@ -66,7 +68,10 @@ public class LevelEditorScene extends Scene{
 
     @Override 
     public void init() {
+        System.out.println("Creating test object'");
         this.testOBJ = new GameObject("test object");
+        this.testOBJ.addComponent(new SpriteRenderer());
+        this.addGameObjectToScene(this.testOBJ);
 
         this.camera = new Camera(new Vector2f());
         defaultShader = new Shader("assets/shaders/default.glsl");
@@ -141,5 +146,16 @@ public class LevelEditorScene extends Scene{
         glBindVertexArray(0);
 
         defaultShader.detach();
+        if(!firstTime) {
+            System.out.println("Creating game object");
+            GameObject go = new GameObject("Game Test 2");
+            go.addComponent(new SpriteRenderer());
+            this.addGameObjectToScene(go);
+            firstTime = true;
+        }
+
+        for(GameObject go : this.gameObjects) {
+            go.update(dt);
+        }
     }
 }
