@@ -5,6 +5,7 @@ import static org.lwjgl.opengl.GL30.*;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import com.components.FontRenderer;
 import com.components.SpriteRenderer;
 import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
@@ -71,6 +72,7 @@ public class LevelEditorScene extends Scene{
         System.out.println("Creating test object'");
         this.testOBJ = new GameObject("test object");
         this.testOBJ.addComponent(new SpriteRenderer());
+        this.testOBJ.addComponent(new FontRenderer());
         this.addGameObjectToScene(this.testOBJ);
 
         this.camera = new Camera(new Vector2f());
