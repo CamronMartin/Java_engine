@@ -8,11 +8,10 @@
   <name>javaengine</name>
   <url>http://maven.apache.org</url>
 
-<properties>
-	<lwjgl.version>3.3.4</lwjgl.version>
-	<joml.version>1.10.7</joml.version>
-	<lwjgl.natives>natives-macos-arm64</lwjgl.natives>
-        </properties>
+	<properties>
+		<lwjgl.version>3.3.4</lwjgl.version>
+		<joml.version>1.10.7</joml.version>
+	</properties>
 
 
     <dependencyManagement>
@@ -38,7 +37,7 @@
 	</dependency>
 
 
-	
+
 	<dependency>
 		<groupId>org.lwjgl</groupId>
 		<artifactId>lwjgl</artifactId>
@@ -370,7 +369,7 @@
 	<dependency>
 		<groupId>org.lwjgl</groupId>
 		<artifactId>lwjgl-vulkan</artifactId>
-		<classifier>${lwjgl.natives}</classifier>
+<!--		<classifier>${lwjgl.natives}</classifier>-->
 	</dependency>
 	<dependency>
 		<groupId>org.lwjgl</groupId>
@@ -394,6 +393,33 @@
 	</dependency>
 </dependencies>
 
+	<profiles>
+		<!-- macOS Profile -->
+		<profile>
+			<id>macos</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<lwjgl.natives>natives-macos-arm64</lwjgl.natives>
+			</properties>
+		</profile>
+
+		<!-- Windows Profile -->
+		<profile>
+			<id>windows</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<lwjgl.natives>natives-windows</lwjgl.natives>
+			</properties>
+		</profile>
+	</profiles>
 
 
 <build>
